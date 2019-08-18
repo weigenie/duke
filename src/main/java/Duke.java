@@ -74,6 +74,13 @@ public class Duke {
                         print(" Got it. I've added this task:\n\t   " + lst.get(lst.size() - 1) + "\n\tNow you have " +
                                 lst.size() + " tasks in the list.");
                         break;
+                    case "delete":
+                        int deleteNum = Integer.parseInt(sc.next()) - 1;
+                        Task toDelete = lst.get(deleteNum);
+                        print(" Noted. I've removed this task: \n\t   " + toDelete + "\n\t Now you have " +
+                                (lst.size() - 1) + " tasks in the list.");
+                        lst.remove(deleteNum);
+                        break;
                     default:
                         throw new DukeException(" ☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                 }
