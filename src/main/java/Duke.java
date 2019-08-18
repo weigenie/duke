@@ -5,7 +5,7 @@ import java.util.Scanner;
 public class Duke {
 
     static Scanner sc = new Scanner(System.in);
-    static List<String> lst = new ArrayList<>();
+    static List<Task> lst = new ArrayList<>();
     static String tab = "\t____________________________________________________________";
 
     public static void main(String[] args) {
@@ -19,7 +19,7 @@ public class Duke {
         print("Hello! I'm Duke\n\tWhat can I do for you?");
         boolean quit = false;
         while (!quit) {
-            String input = sc.nextLine();
+            String input = sc.next();
             switch(input) {
                 case "bye":
                     print("Bye. Hope to see you again soon!");
@@ -32,9 +32,16 @@ public class Duke {
                     }
                     System.out.println(tab + "\n");
                     break;
+                case "done":
+                    int doneNum = Integer.parseInt(sc.next()) - 1;
+                    lst.get(doneNum).markAsDone();
+                    print(" Nice! I've marked this task as done:\n\t   " + lst.get(doneNum));
+                    break;
                 default:
+                    String rest = sc.nextLine();
+                    input = input + rest;
                     print(" added: " + input);
-                    lst.add(input);
+                    lst.add(new Task(input));
                     break;
             }
         }
