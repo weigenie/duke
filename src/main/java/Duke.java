@@ -20,6 +20,8 @@ public class Duke {
         boolean quit = false;
         while (!quit) {
             String input = sc.next();
+            String rest;
+            String[] split;
             switch(input) {
                 case "bye":
                     print("Bye. Hope to see you again soon!");
@@ -27,6 +29,7 @@ public class Duke {
                     break;
                 case "list":
                     System.out.println(tab);
+                    System.out.println(" Here are the tasks in your list");
                     for (int i = 0; i < lst.size(); i++) {
                         System.out.println("\t "  + (i + 1) + ". " + lst.get(i));
                     }
@@ -37,11 +40,28 @@ public class Duke {
                     lst.get(doneNum).markAsDone();
                     print(" Nice! I've marked this task as done:\n\t   " + lst.get(doneNum));
                     break;
+                case "todo":
+                    String desc = sc.nextLine();
+                    lst.add(new Todo(desc));
+                    print(" Got it. I've added this task:\n\t   " + lst.get(lst.size() - 1) + "\n\tNow you have " +
+                            lst.size() + " tasks in the list.");
+                    break;
+                case "deadline":
+                    rest = sc.nextLine();
+                    split = rest.split("/by ");
+                    lst.add(new Deadline(split[0], split[1]));
+                    print(" Got it. I've added this task:\n\t   " + lst.get(lst.size() - 1) + "\n\tNow you have " +
+                            lst.size() + " tasks in the list.");
+                    break;
+                case "event":
+                    rest = sc.nextLine();
+                    split = rest.split("/at ");
+                    lst.add(new Event(split[0], split[1]));
+                    print(" Got it. I've added this task:\n\t   " + lst.get(lst.size() - 1) + "\n\tNow you have " +
+                            lst.size() + " tasks in the list.");
+                    break;
                 default:
-                    String rest = sc.nextLine();
-                    input = input + rest;
-                    print(" added: " + input);
-                    lst.add(new Task(input));
+                    System.out.println("error");
                     break;
             }
         }
