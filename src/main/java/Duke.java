@@ -30,20 +30,24 @@ public class Duke {
                         break;
                     case "list":
                         System.out.println(tab);
-                        System.out.println(" Here are the tasks in your list");
+                        System.out.println("\t Here are the tasks in your list");
                         for (int i = 0; i < lst.size(); i++) {
                             System.out.println("\t " + (i + 1) + ". " + lst.get(i));
                         }
                         System.out.println(tab + "\n");
                         break;
                     case "done":
-                        int doneNum = Integer.parseInt(sc.next()) - 1;
+                        rest = sc.nextLine();
+                        if (rest.isEmpty()) {
+                            throw new DukeException(" ☹ OOPS!!! The description of a done cannot be empty.");
+                        }
+                        int doneNum = Integer.parseInt(next) - 1;
                         lst.get(doneNum).markAsDone();
                         print(" Nice! I've marked this task as done:\n\t   " + lst.get(doneNum));
                         break;
                     case "todo":
-                        String desc = sc.nextLine();
-                        if (desc.isEmpty()) {
+                        rest = sc.nextLine();
+                        if (rest.isEmpty()) {
                             throw new DukeException(" ☹ OOPS!!! The description of a todo cannot be empty.");
                         }
                         lst.add(new Todo(desc));
@@ -75,6 +79,10 @@ public class Duke {
                                 lst.size() + " tasks in the list.");
                         break;
                     case "delete":
+                        rest = sc.nextLine();
+                        if (rest.isEmpty()) {
+                            throw new DukeException(" ☹ OOPS!!! The description of an delete cannot be empty.");
+                        }
                         int deleteNum = Integer.parseInt(sc.next()) - 1;
                         Task toDelete = lst.get(deleteNum);
                         print(" Noted. I've removed this task: \n\t   " + toDelete + "\n\t Now you have " +
@@ -82,6 +90,7 @@ public class Duke {
                         lst.remove(deleteNum);
                         break;
                     default:
+                        sc.nextLine();
                         throw new DukeException(" ☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                 }
             } catch (DukeException e) {
