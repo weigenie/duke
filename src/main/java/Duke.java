@@ -1,14 +1,22 @@
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.File;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
 
-//    private static final SimpleDateFormat DATE_FORMAT_PARSE = new SimpleDateFormat("dd/MM/yyyy HHmm");
-//    private static final SimpleDateFormat DATE_FORMAT_PRINT = new SimpleDateFormat()
-    private static final String TEXT_DOCUMENT = "D:/weikendotcom/Documents/Uni/Computing/Y2S1/CS2103T/projects/project duke/data.txt";
+    private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("dd/MM/yyyy HHmm");
+    private static final String TEXT_DOCUMENT = "../../../data.txt";
     private static final String TAB = "\t____________________________________________________________";
 
     private static Scanner sc = new Scanner(System.in);
@@ -158,12 +166,24 @@ public class Duke {
 
     static void addDeadline(String line) {
         String[] split = line.split("/by ");
-        tasks.add(new Deadline(split[0], split[1]));
+        String desc;
+        if (isDate(split[1])) {
+            desc = getFormattedDate(split[1]);
+        } else {
+            desc = split[1];
+        }
+        tasks.add(new Deadline(split[0], desc));
     }
 
     static void addEvent(String line) {
         String[] split = line.split("/at ");
-        tasks.add(new Event(split[0], split[1]));
+        String desc;
+        if (isDate(split[1])) {
+            desc = getFormattedDate(split[1]);
+        } else {
+            desc = split[1];
+        }
+        tasks.add(new Event(split[0], desc));
     }
 
     static void writeData() {
@@ -179,5 +199,45 @@ public class Duke {
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
+    }
+
+    static boolean isDate(String text) {
+        try {
+            DATE_FORMAT.parse(text);
+            return true;
+        } catch (ParseException e) {
+            return false;
+        }
+    }
+
+    static String getFormattedDate(String text) {
+        try {
+            Date date = DATE_FORMAT.parse(text);
+            String day = new SimpleDateFormat("dd").format(date);
+            String month = new SimpleDateFormat("MMMMMMMMMMMMMMM").format(date);
+            String year = new SimpleDateFormat("yy").format(date);
+            String time = new SimpleDateFormat("h:mm a").format(date).toLowerCase();
+            String ordinalIndicator;
+
+            int int_day = Integer.parseInt(day);
+            if (int_day >= 11 && int_day <= 13) {
+                ordinalIndicator = "th";
+            } else if (int_day % 10 == 1) {
+                ordinalIndicator = "st";
+            } else if (int_day % 10 == 2) {
+                ordinalIndicator = "nd";
+            } else if (int_day % 10 == 3) {
+                ordinalIndicator = "rd";
+            } else {
+                ordinalIndicator = "th";
+            }
+
+            String outputDate = int_day + ordinalIndicator + " of " + month + " " + year + ", " + time;
+            return outputDate;
+        } catch (ParseException e) {
+            System.out.println("isDate has bugs");
+            System.out.println(e.getMessage());
+        }
+        return "";
     }
 }
