@@ -2,3 +2,8 @@ T|0| Buy Groceries
 E|0| Hackathon |Tuesday
 D|0| CS2103T Assignment |Wednesday
 E|0| Ceremony |Tomorrow
+<<<<<<< HEAD
+=======
+E|0| AI Talk |02nd of December 19, h:mm a
+D|0| Submission |2nd of December 19, 6:00 PM
+>>>>>>> branch-level-8
