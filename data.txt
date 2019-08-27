@@ -1,4 +1,4 @@
-T|0| Buy Groceries
-D|0| CS2103T Assignment |Wednesday
-E|0| Ceremony |Tomorrow
-D|0| CS2101 Assignment |Thursday
+T|0|Exercise
+T|0|Buy groceries 
+D|0|Submission |1st of January 19, 6:00 pm
+E|0|Hackathon |12th of December 19, 6:00 pm
