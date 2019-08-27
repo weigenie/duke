@@ -1,37 +1,13 @@
-<<<<<<< HEAD
-import java.io.*;
-import java.text.SimpleDateFormat;
-=======
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-
->>>>>>> branch-level-8
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
+
 public class Duke {
 
-<<<<<<< HEAD
-//    private static final SimpleDateFormat DATE_FORMAT_PARSE = new SimpleDateFormat("dd/MM/yyyy HHmm");
-//    private static final SimpleDateFormat DATE_FORMAT_PRINT = new SimpleDateFormat()
-    private static final String TEXT_DOCUMENT = "D:/weikendotcom/Documents/Uni/Computing/Y2S1/CS2103T/projects/project duke/data.txt";
-    private static final String TAB = "\t____________________________________________________________";
+    static Scanner sc = new Scanner(System.in);
+    static List<Task> lst = new ArrayList<>();
+    static String tab = "\t____________________________________________________________";
 
-    private static Scanner sc = new Scanner(System.in);
-
-    private static List<Task> tasks = new ArrayList<>();
-=======
-    private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("dd/MM/yyyy HHmm");
-    private static final String TAB = "\t____________________________________________________________";
-
-    private static Scanner sc = new Scanner(System.in);
->>>>>>> branch-level-8
-
-    private static List<Task> tasks = new ArrayList<>();
     public static void main(String[] args) {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -40,47 +16,6 @@ public class Duke {
                 + "|____/ \\__,_|_|\\_\\___|\n";
 //        System.out.println("Hello from\n" + logo);
 
-        try {
-            FileReader fileReader = new FileReader(TEXT_DOCUMENT);
-            BufferedReader bufferedReader = new BufferedReader(fileReader);
-            String line = null;
-            try {
-                while ((line = bufferedReader.readLine()) != null) {
-                    String[] splited = line.split("\\|");
-                    switch (splited[0]) {
-                        case "T":
-                            Todo newTodo = new Todo(splited[2]);
-                            if (Boolean.parseBoolean(splited[1])) {
-                                newTodo.markAsDone();
-                            }
-                            tasks.add(newTodo);
-                            break;
-                        case "D":
-                            Deadline newDeadline = new Deadline(splited[2], splited[3]);
-                            if (Boolean.parseBoolean(splited[1])) {
-                                newDeadline.markAsDone();
-                            }
-                            tasks.add(newDeadline);
-                            break;
-                        case "E":
-                            Event newEvent = new Event(splited[2], splited[3]);
-                            if (Boolean.parseBoolean(splited[1])) {
-                                newEvent.markAsDone();
-                            }
-                            tasks.add(newEvent);
-                            break;
-                        default:
-                            throw new DukeException("error data formatting in data.txt");
-                    }
-                }
-                File file = new File(TEXT_DOCUMENT);
-                bufferedReader.close();
-            } catch (DukeException e) {
-                System.out.println(e.getMessage());
-            }
-        } catch (IOException e) {
-            System.out.println(e.getMessage());
-        }
         print("Hello! I'm Duke\n\tWhat can I do for you?");
         boolean quit = false;
         while (!quit) {
@@ -89,104 +24,35 @@ public class Duke {
             String[] split;
             try {
                 switch (input) {
-<<<<<<< HEAD
-                case "bye":
-                    print("Bye. Hope to see you again soon!");
-                    quit = true;
-                    writeData();
-                    break;
-                case "list":
-                    System.out.println(TAB);
-                    System.out.println("\t Here are the tasks in your list");
-                    for (int i = 0; i < tasks.size(); i++) {
-                        System.out.println("\t " + (i + 1) + ". " + tasks.get(i));
-                    }
-                    System.out.println(TAB + "\n");
-                    break;
-                case "done":
-                    rest = sc.nextLine();
-                    if (rest.isEmpty()) {
-                        throw new DukeException(" ☹ OOPS!!! The description of a done cannot be empty.");
-                    }
-                    int doneNum = Integer.parseInt(rest) - 1;
-                    tasks.get(doneNum).markAsDone();
-                    print(" Nice! I've marked this task as done:\n\t   " + tasks.get(doneNum));
-                    break;
-                case "todo":
-                    rest = sc.nextLine();
-                    if (rest.isEmpty()) {
-                        throw new DukeException(" ☹ OOPS!!! The description of a todo cannot be empty.");
-                    }
-                    addTodo(rest);
-                    print(" Got it. I've added this task:\n\t   " + tasks.get(tasks.size() - 1) + "\n\tNow you have " +
-                            tasks.size() + " tasks in the list.");
-                    break;
-                case "deadline":
-                    rest = sc.nextLine();
-                    if (rest.isEmpty()) {
-                        throw new DukeException(" ☹ OOPS!!! The description of a deadline cannot be empty.");
-                    } else if (!rest.contains("/by")) {
-                        throw new DukeException(" ☹ OOPS!!! Deadline input should include '/by'.");
-                    }
-                    addDeadline(rest);
-                    print(" Got it. I've added this task:\n\t   " + tasks.get(tasks.size() - 1) + "\n\tNow you have " +
-                            tasks.size() + " tasks in the list.");
-                    break;
-                case "event":
-                    rest = sc.nextLine();
-                    if (rest.isEmpty()) {
-                        throw new DukeException(" ☹ OOPS!!! The description of an event cannot be empty.");
-                    } else if (!rest.contains("/at")) {
-                        throw new DukeException(" ☹ OOPS!!! Deadline input should include '/at'.");
-                    }
-                    addEvent(rest);
-                    print(" Got it. I've added this task:\n\t   " + tasks.get(tasks.size() - 1) + "\n\tNow you have " +
-                            tasks.size() + " tasks in the list.");
-                    break;
-                case "delete":
-                    rest = sc.nextLine();
-                    if (rest.isEmpty()) {
-                        throw new DukeException(" ☹ OOPS!!! The description of an delete cannot be empty.");
-                    }
-                    int deleteNum = Integer.parseInt(sc.next()) - 1;
-                    Task toDelete = tasks.get(deleteNum);
-                    print(" Noted. I've removed this task: \n\t   " + toDelete + "\n\t Now you have " +
-                            (tasks.size() - 1) + " tasks in the list.");
-                    tasks.remove(deleteNum);
-                    break;
-                default:
-                    sc.nextLine();
-                    throw new DukeException(" ☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
-=======
                     case "bye":
                         print("Bye. Hope to see you again soon!");
                         quit = true;
                         break;
                     case "list":
-                        System.out.println(TAB);
+                        System.out.println(tab);
                         System.out.println("\t Here are the tasks in your list");
-                        for (int i = 0; i < tasks.size(); i++) {
-                            System.out.println("\t " + (i + 1) + ". " + tasks.get(i));
+                        for (int i = 0; i < lst.size(); i++) {
+                            System.out.println("\t " + (i + 1) + ". " + lst.get(i));
                         }
-                        System.out.println(TAB + "\n");
+                        System.out.println(tab + "\n");
                         break;
                     case "done":
                         rest = sc.nextLine();
                         if (rest.isEmpty()) {
                             throw new DukeException(" ☹ OOPS!!! The description of a done cannot be empty.");
                         }
-                        int doneNum = Integer.parseInt(rest) - 1;
-                        tasks.get(doneNum).markAsDone();
-                        print(" Nice! I've marked this task as done:\n\t   " + tasks.get(doneNum));
+                        int doneNum = Integer.parseInt(next) - 1;
+                        lst.get(doneNum).markAsDone();
+                        print(" Nice! I've marked this task as done:\n\t   " + lst.get(doneNum));
                         break;
                     case "todo":
                         rest = sc.nextLine();
                         if (rest.isEmpty()) {
                             throw new DukeException(" ☹ OOPS!!! The description of a todo cannot be empty.");
                         }
-                        addTodo(rest);
-                        print(" Got it. I've added this task:\n\t   " + tasks.get(tasks.size() - 1) + "\n\tNow you have " +
-                                tasks.size() + " tasks in the list.");
+                        lst.add(new Todo(desc));
+                        print(" Got it. I've added this task:\n\t   " + lst.get(lst.size() - 1) + "\n\tNow you have " +
+                                lst.size() + " tasks in the list.");
                         break;
                     case "deadline":
                         rest = sc.nextLine();
@@ -195,9 +61,10 @@ public class Duke {
                         } else if (!rest.contains("/by")) {
                             throw new DukeException(" ☹ OOPS!!! Deadline input should include '/by'.");
                         }
-                        addDeadline(rest);
-                        print(" Got it. I've added this task:\n\t   " + tasks.get(tasks.size() - 1) + "\n\tNow you have " +
-                                tasks.size() + " tasks in the list.");
+                        split = rest.split("/by ");
+                        lst.add(new Deadline(split[0], split[1]));
+                        print(" Got it. I've added this task:\n\t   " + lst.get(lst.size() - 1) + "\n\tNow you have " +
+                                lst.size() + " tasks in the list.");
                         break;
                     case "event":
                         rest = sc.nextLine();
@@ -206,9 +73,10 @@ public class Duke {
                         } else if (!rest.contains("/at")) {
                             throw new DukeException(" ☹ OOPS!!! Deadline input should include '/at'.");
                         }
-                        addEvent(rest);
-                        print(" Got it. I've added this task:\n\t   " + tasks.get(tasks.size() - 1) + "\n\tNow you have " +
-                                tasks.size() + " tasks in the list.");
+                        split = rest.split("/at ");
+                        lst.add(new Event(split[0], split[1]));
+                        print(" Got it. I've added this task:\n\t   " + lst.get(lst.size() - 1) + "\n\tNow you have " +
+                                lst.size() + " tasks in the list.");
                         break;
                     case "delete":
                         rest = sc.nextLine();
@@ -216,15 +84,14 @@ public class Duke {
                             throw new DukeException(" ☹ OOPS!!! The description of an delete cannot be empty.");
                         }
                         int deleteNum = Integer.parseInt(sc.next()) - 1;
-                        Task toDelete = tasks.get(deleteNum);
+                        Task toDelete = lst.get(deleteNum);
                         print(" Noted. I've removed this task: \n\t   " + toDelete + "\n\t Now you have " +
-                                (tasks.size() - 1) + " tasks in the list.");
-                        tasks.remove(deleteNum);
+                                (lst.size() - 1) + " tasks in the list.");
+                        lst.remove(deleteNum);
                         break;
                     default:
                         sc.nextLine();
                         throw new DukeException(" ☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
->>>>>>> branch-level-8
                 }
             } catch (DukeException e) {
                 print (e.getMessage());
@@ -233,101 +100,8 @@ public class Duke {
     }
 
     static void print(String txt) {
-        System.out.println(TAB);
+        System.out.println(tab);
         System.out.println("\t" + txt);
-        System.out.println(TAB + "\n");
-    }
-
-<<<<<<< HEAD
-=======
-
->>>>>>> branch-level-8
-    static void addTodo(String title) {
-        tasks.add(new Todo(title));
-    }
-
-    static void addDeadline(String line) {
-        String[] split = line.split("/by ");
-<<<<<<< HEAD
-        tasks.add(new Deadline(split[0], split[1]));
-=======
-        String desc;
-        if (isDate(split[1])) {
-            desc = getFormattedDate(split[1]);
-        } else {
-            desc = split[1];
-        }
-        tasks.add(new Deadline(split[0], desc));
->>>>>>> branch-level-8
-    }
-
-    static void addEvent(String line) {
-        String[] split = line.split("/at ");
-<<<<<<< HEAD
-        tasks.add(new Event(split[0], split[1]));
-    }
-
-    static void writeData() {
-        try {
-            FileWriter fileWriter = new FileWriter(TEXT_DOCUMENT);
-            BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
-            for (Task task: tasks) {
-                String taskData = task.getData();
-                bufferedWriter.write(taskData);
-                bufferedWriter.newLine();
-            }
-            bufferedWriter.close();
-        } catch (IOException e) {
-            System.out.println(e.getMessage());
-        }
-=======
-        String desc;
-        if (isDate(split[1])) {
-            desc = getFormattedDate(split[1]);
-        } else {
-            desc = split[1];
-        }
-        tasks.add(new Event(split[0], desc));
-    }
-
-    static boolean isDate(String text) {
-        try {
-            DATE_FORMAT.parse(text);
-            return true;
-        } catch (ParseException e) {
-            return false;
-        }
-    }
-
-    static String getFormattedDate(String text) {
-        try {
-            Date date = DATE_FORMAT.parse(text);
-            String day = new SimpleDateFormat("dd").format(date);
-            String month = new SimpleDateFormat("MMMMMMMMMMMMMMM").format(date);
-            String year = new SimpleDateFormat("yyyy").format(date);
-            String time = new SimpleDateFormat("h:mm a").format(date).toLowerCase();
-            String ordinalIndicator;
-
-            int int_day = Integer.parseInt(day);
-            if (int_day >= 11 && int_day <= 13) {
-                ordinalIndicator = "th";
-            } else if (int_day % 10 == 1) {
-                ordinalIndicator = "st";
-            } else if (int_day % 10 == 2) {
-                ordinalIndicator = "nd";
-            } else if (int_day % 10 == 3) {
-                ordinalIndicator = "rd";
-            } else {
-                ordinalIndicator = "th";
-            }
-
-            String outputDate = int_day + ordinalIndicator + " of " + month + " " + year + ", " + time;
-            return outputDate;
-        } catch (ParseException e) {
-            System.out.println("isDate has bugs");
-            System.out.println(e.getMessage());
-        }
-        return "";
->>>>>>> branch-level-8
+        System.out.println(tab + "\n");
     }
 }

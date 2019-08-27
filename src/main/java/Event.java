@@ -8,14 +8,6 @@ public class Event extends Task {
     }
 
     @Override
-    public String getData() {
-        int isDone = super.isDone
-                ? 1
-                : 0;
-        return "E|" + isDone + "|" + super.description + "|" + this.date;
-    }
-
-    @Override
     public String toString() {
         return "[E]" + super.toString() + "(at: " + this.date + ")";
     }

@@ -8,14 +8,6 @@ public class Deadline extends Task {
     }
 
     @Override
-    public String getData() {
-        int isDone = super.isDone
-                ? 1
-                : 0;
-        return "D|" + isDone + "|" + super.description + "|" + this.date;
-    }
-
-    @Override
     public String toString() {
         return "[D]" + super.toString() + "(by: " + date + ")";
     }
