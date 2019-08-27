@@ -1,9 +1,14 @@
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
 
+    private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("dd/MM/yyyy HHmm");
     static String TAB = "\t____________________________________________________________";
 
     static Scanner sc = new Scanner(System.in);
@@ -63,7 +68,13 @@ public class Duke {
                         throw new DukeException(" ☹ OOPS!!! Deadline input should include '/by'.");
                     }
                     split = rest.split("/by ");
-                    tasks.add(new Deadline(split[0], split[1]));
+                    String desc;
+                    if (isDate(split[1])) {
+                        desc = getFormattedDate(split[1]);
+                    } else {
+                        desc = split[1];
+                    }
+                    tasks.add(new Deadline(split[0], desc));
                     print(" Got it. I've added this task:\n\t   " + tasks.get(tasks.size() - 1) + "\n\tNow you have " +
                             tasks.size() + " tasks in the list.");
                     break;
@@ -75,7 +86,12 @@ public class Duke {
                         throw new DukeException(" ☹ OOPS!!! Deadline input should include '/at'.");
                     }
                     split = rest.split("/at ");
-                    tasks.add(new Event(split[0], split[1]));
+                    if (isDate(split[1])) {
+                        desc = getFormattedDate(split[1]);
+                    } else {
+                        desc = split[1];
+                    }
+                    tasks.add(new Event(split[0], desc));
                     print(" Got it. I've added this task:\n\t   " + tasks.get(tasks.size() - 1) + "\n\tNow you have " +
                             tasks.size() + " tasks in the list.");
                     break;
@@ -84,7 +100,7 @@ public class Duke {
                     if (rest.isEmpty()) {
                         throw new DukeException(" ☹ OOPS!!! The description of an delete cannot be empty.");
                     }
-                    int deleteNum = Integer.parseInt(sc.next()) - 1;
+                    int deleteNum = Integer.parseInt(rest.trim()) - 1;
                     Task toDelete = tasks.get(deleteNum);
                     print(" Noted. I've removed this task: \n\t   " + toDelete + "\n\t Now you have " +
                             (tasks.size() - 1) + " tasks in the list.");
@@ -104,5 +120,45 @@ public class Duke {
         System.out.println(TAB);
         System.out.println("\t" + txt);
         System.out.println(TAB + "\n");
+    }
+
+    static boolean isDate(String text) {
+        try {
+            DATE_FORMAT.parse(text);
+            return true;
+        } catch (ParseException e) {
+            return false;
+        }
+    }
+
+    static String getFormattedDate(String text) {
+        try {
+            Date date = DATE_FORMAT.parse(text);
+            String day = new SimpleDateFormat("dd").format(date);
+            String month = new SimpleDateFormat("MMMMMMMMMMMMMMM").format(date);
+            String year = new SimpleDateFormat("yy").format(date);
+            String time = new SimpleDateFormat("h:mm a").format(date).toLowerCase();
+            String ordinalIndicator;
+
+            int int_day = Integer.parseInt(day);
+            if (int_day >= 11 && int_day <= 13) {
+                ordinalIndicator = "th";
+            } else if (int_day % 10 == 1) {
+                ordinalIndicator = "st";
+            } else if (int_day % 10 == 2) {
+                ordinalIndicator = "nd";
+            } else if (int_day % 10 == 3) {
+                ordinalIndicator = "rd";
+            } else {
+                ordinalIndicator = "th";
+            }
+
+            String outputDate = int_day + ordinalIndicator + " of " + month + " " + year + ", " + time;
+            return outputDate;
+        } catch (ParseException e) {
+            System.out.println("isDate has bugs");
+            System.out.println(e.getMessage());
+        }
+        return "";
     }
 }
