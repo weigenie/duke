@@ -120,8 +120,36 @@ public class TaskList {
         return eventAdded;
     }
 
+    /**
+     * Deletes a task in the collections.
+     * @param txt Text containing position of task to be deleted.
+     * @return Deleted task.
+     */
     public Task deleteTask(String txt) {
         int deleteNum = Integer.parseInt(txt.trim()) - 1;
         return tasks.remove(deleteNum);
+    }
+
+    /**
+     * Finds all the tasks containing the text.
+     * @param txt Specified text to be found in the tasks.
+     * @return TaskList containing the found tasks.
+     */
+    public TaskList find(String txt) {
+        ArrayList<Task> list = new ArrayList<>();
+        for (int i = 0; i < tasks.size(); i++) {
+            if (tasks.get(i).contains(txt)) {
+                list.add(tasks.get(i));
+            }
+        }
+        return new TaskList(list);
+    }
+
+    /**
+     * Checks whether the collections is empty.
+     * @return Boolean value whether the collections is empty.
+     */
+    public boolean isEmpty() {
+        return tasks.isEmpty();
     }
 }

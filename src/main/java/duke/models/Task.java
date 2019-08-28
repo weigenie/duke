@@ -35,6 +35,15 @@ public abstract class Task {
      */
     public abstract String getData();
 
+    /**
+     * Checks whether task title contains specified text.
+     * @param txt Specified text to look for.
+     * @return Boolean of whether task title contains text.
+     */
+    public boolean contains(String txt) {
+        return description.contains(txt);
+    }
+
     @Override
     public String toString() {
         return "[" + getStatusIcon() + "] " + description;

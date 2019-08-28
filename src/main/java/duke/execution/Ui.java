@@ -77,12 +77,16 @@ public class Ui {
      * @param taskList Collections of tasks.
      */
     public void listTasks(TaskList taskList) {
-        System.out.println(TAB);
-        System.out.println("\t Here are the tasks in your list");
-        for (int i = 0; i < taskList.getSize(); i++) {
-            System.out.println("\t " + (i + 1) + ". " + taskList.get(i));
+        if (taskList.isEmpty()) {
+            print(" No tasks to be found.");
+        } else {
+            System.out.println(TAB);
+            System.out.println("\t Here are the tasks in your list");
+            for (int i = 0; i < taskList.getSize(); i++) {
+                System.out.println("\t " + (i + 1) + ". " + taskList.get(i));
+            }
+            System.out.println(TAB + "\n");
         }
-        System.out.println(TAB + "\n");
     }
 
     /**

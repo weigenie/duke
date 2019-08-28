@@ -73,6 +73,13 @@ public class Command {
             storage.save(tasks);
             break;
 
+        case "find":
+            if (txt.isEmpty()) {
+                throw new DukeException(" ☹ OOPS!!! There is no input for the search!");
+            }
+            ui.listTasks(tasks.find(txt));
+            break;
+
         default:
             throw new DukeException(" ☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
         }

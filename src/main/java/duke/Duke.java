@@ -13,8 +13,7 @@ import duke.execution.Ui;
  */
 public class Duke {
 
-    /** Filepath to data document */
-    static final String TEXT_DOCUMENT = "../../../data.txt";
+    static final String TEXT_DOCUMENT = "./data/data.txt";
 
     /** Storage to read and write files */
     private Storage storage;
