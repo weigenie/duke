@@ -1,3 +1,8 @@
+package execution;
+
+import exceptions.DukeException;
+import models.Task;
+
 public class Command {
 
     private String action;
@@ -46,7 +51,7 @@ public class Command {
             if (txt.isEmpty()) {
                 throw new DukeException(" ☹ OOPS!!! The description of an event cannot be empty.");
             } else if (!txt.contains("/at")) {
-                throw new DukeException(" ☹ OOPS!!! Deadline input should include '/at'.");
+                throw new DukeException(" ☹ OOPS!!! Event input should include '/at'.");
             }
             Task eventAdded = tasks.addEvent(txt);
             ui.showAddTask(eventAdded, tasks.getSize());
