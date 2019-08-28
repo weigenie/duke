@@ -9,14 +9,23 @@ import models.Todo;
 import java.io.*;
 import java.util.ArrayList;
 
+/**
+ * Storage to handle reading and writing files.
+ */
 public class Storage {
 
+    /** String containing the file path to the desired file */
     String filepath;
 
     public Storage(String filepath) {
         this.filepath = filepath;
     }
 
+    /**
+     * Reads a file and loads it into an ArrayList.
+     * @return Loaded ArrayList.
+     * @throws DukeException If cannot read file.
+     */
     public ArrayList<Task> load() throws DukeException {
         try {
             ArrayList<Task> tasks = new ArrayList<>();
@@ -60,6 +69,10 @@ public class Storage {
         }
     }
 
+    /**
+     * Writes the tasks into file.
+     * @param taskList ArrayList containing tasks to be written.
+     */
     public void save(TaskList taskList) {
         try {
             ArrayList<Task> tasks = taskList.getTasks();

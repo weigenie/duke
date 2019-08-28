@@ -3,9 +3,14 @@ package execution;
 import exceptions.DukeException;
 import models.Task;
 
+/**
+ * Command class to decide action taken and execute it.
+ */
 public class Command {
 
+    /** String specifying the action of the command */
     private String action;
+    /** String specifying the details of the action */
     private String txt;
 
     public Command(String action, String txt) {
@@ -13,6 +18,14 @@ public class Command {
         this.txt = txt;
     }
 
+    /**
+     * Executes the command based on the action and txt strings.
+     * @param tasks Associated TaskList.
+     * @param ui Associated Ui.
+     * @param storage Associated Storage.
+     * @return Boolean of whether command has been executed.
+     * @throws DukeException If error was encountered.
+     */
     public boolean execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         switch (action) {
         case "bye":

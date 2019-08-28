@@ -8,8 +8,12 @@ import models.Todo;
 
 import java.util.ArrayList;
 
+/**
+ * TaskList to handle the collections of tasks.
+ */
 public class TaskList {
 
+    /** Collections of tasks */
     private ArrayList<Task> tasks;
 
     public TaskList() {
