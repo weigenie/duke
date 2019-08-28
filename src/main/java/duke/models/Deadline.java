@@ -1,7 +1,11 @@
 package duke.models;
 
+/**
+ * Task with a deadline.
+ */
 public class Deadline extends Task {
 
+    /** Deadline of task */
     private String date;
 
     public Deadline(String description, String date) {

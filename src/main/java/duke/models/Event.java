@@ -1,7 +1,11 @@
 package duke.models;
 
+/**
+ * Event with a specified date.
+ */
 public class Event extends Task {
 
+    /** Specified date for the event */
     private String date;
 
     public Event(String description, String date) {
