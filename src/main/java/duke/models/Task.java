@@ -1,4 +1,4 @@
-package models;
+package duke.models;
 
 public abstract class Task {
     protected String description;
@@ -15,6 +15,10 @@ public abstract class Task {
 
     public void markAsDone() {
         this.isDone = true;
+    }
+
+    public boolean contains(String txt) {
+        return description.contains(txt);
     }
 
     public abstract String getData();

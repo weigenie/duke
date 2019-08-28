@@ -1,7 +1,7 @@
-package execution;
+package duke.execution;
 
-import exceptions.DukeException;
-import models.Task;
+import duke.exceptions.DukeException;
+import duke.models.Task;
 
 public class Command {
 
@@ -64,6 +64,12 @@ public class Command {
             Task deletedTask = tasks.deleteTask(txt);
             ui.showDeleted(deletedTask, tasks.getSize());
             storage.save(tasks);
+            break;
+        case "find":
+            if (txt.isEmpty()) {
+                throw new DukeException(" ☹ OOPS!!! There is no input for the search!");
+            }
+            ui.listTasks(tasks.find(txt));
             break;
         default:
             throw new DukeException(" ☹ OOPS!!! I'm sorry, but I don't know what that means :-(");

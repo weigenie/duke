@@ -1,9 +1,11 @@
-import exceptions.DukeException;
-import execution.*;
+package duke;
+
+import duke.exceptions.DukeException;
+import duke.execution.*;
 
 public class Duke {
 
-    static final String TEXT_DOCUMENT = "../../../data.txt";
+    static final String TEXT_DOCUMENT = "./data/data.txt";
 
     private Storage storage;
     private TaskList tasks;

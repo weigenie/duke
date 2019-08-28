@@ -1,10 +1,10 @@
-package execution;
+package duke.execution;
 
-import exceptions.DukeException;
-import models.Deadline;
-import models.Event;
-import models.Task;
-import models.Todo;
+import duke.exceptions.DukeException;
+import duke.models.Deadline;
+import duke.models.Event;
+import duke.models.Task;
+import duke.models.Todo;
 
 import java.util.ArrayList;
 
@@ -79,5 +79,19 @@ public class TaskList {
     public Task deleteTask(String txt) {
         int deleteNum = Integer.parseInt(txt.trim()) - 1;
         return tasks.remove(deleteNum);
+    }
+
+    public TaskList find(String txt) {
+        ArrayList<Task> list = new ArrayList<>();
+        for (int i = 0; i < tasks.size(); i++) {
+            if (tasks.get(i).contains(txt)) {
+                list.add(tasks.get(i));
+            }
+        }
+        return new TaskList(list);
+    }
+
+    public boolean isEmpty() {
+        return tasks.isEmpty();
     }
 }
