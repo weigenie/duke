@@ -1,17 +1,15 @@
-package models;
-
-public class Deadline extends Task {
+public class Event extends Task {
 
     private String date;
 
-    public Deadline(String description, String date) {
+    public Event(String description, String date) {
         super(description);
         this.date = date;
     }
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + "(by: " + date + ")";
+        return "[E]" + super.toString() + "(at: " + this.date + ")";
     }
 
     @Override
@@ -19,6 +17,6 @@ public class Deadline extends Task {
         int isDone = super.isDone
                 ? 1
                 : 0;
-        return "D|" + isDone + "|" + super.description + "|" + this.date;
+        return "E|" + isDone + "|" + super.description + "|" + this.date;
     }
 }

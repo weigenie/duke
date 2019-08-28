@@ -1,8 +1,4 @@
-package execution;
-
 import java.util.Scanner;
-
-import models.Task;
 
 public class Ui {
 
