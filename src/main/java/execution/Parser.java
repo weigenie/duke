@@ -4,19 +4,10 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-/**
- * Parser with static methods to parse strings.
- */
 public class Parser {
 
-    /** Standard date format to parse date & time */
     private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("dd/MM/yyyy HHmm");
 
-    /**
-     * Parses an input.
-     * @param line Input string.
-     * @return Command based on input.
-     */
     public static Command parse(String line) {
         String[] split = line.split(" ");
         String rest = "";
@@ -28,11 +19,6 @@ public class Parser {
         return new Command(actionWord, rest);
     }
 
-    /**
-     * Checks whether a text is in the correct date format.
-     * @param txt Date and time to be parsed.
-     * @return Boolean whether the text can be parsed into a date.
-     */
     public static boolean isDate(String txt) {
         try {
             DATE_FORMAT.parse(txt);
@@ -42,11 +28,6 @@ public class Parser {
         }
     }
 
-    /**
-     * Parses and formats a date in our standard form.
-     * @param txt String containing a date to be parsed.
-     * @return String containing the date in our standard form.
-     */
     public static String getFormattedDate(String txt) {
         try {
             Date date = DATE_FORMAT.parse(txt);
