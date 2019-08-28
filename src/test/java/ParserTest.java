@@ -2,7 +2,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import execution.Parser;
+import duke.execution.Parser;
 
 public class ParserTest {
 

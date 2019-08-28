@@ -1,6 +1,6 @@
-package execution;
+package duke.execution;
 
-import models.Task;
+import duke.models.Task;
 
 import java.util.Scanner;
 
@@ -14,7 +14,7 @@ public class Ui {
     }
 
     public void showWelcomeMessage() {
-        print("Hello! I'm Duke\n\tWhat can I do for you?");
+        print("Hello! I'm duke.Duke\n\tWhat can I do for you?");
     }
 
     public void showError(String msg) {

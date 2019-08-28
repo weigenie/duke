@@ -1,9 +1,9 @@
-import exceptions.DukeException;
+import duke.exceptions.DukeException;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import execution.TaskList;
+import duke.execution.TaskList;
 
 public class TaskListTest {
 

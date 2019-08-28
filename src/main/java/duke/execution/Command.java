@@ -1,7 +1,8 @@
-package execution;
+package duke.execution;
 
-import exceptions.DukeException;
-import models.Task;
+import duke.exceptions.DukeException;
+
+import duke.models.Task;
 
 public class Command {
 
@@ -18,9 +19,11 @@ public class Command {
         case "bye":
             ui.exit();
             return false;
+
         case "list":
             ui.listTasks(tasks);
             break;
+
         case "done":
             if (txt.isEmpty()) {
                 throw new DukeException(" ☹ OOPS!!! The description of a done cannot be empty.");
@@ -29,6 +32,7 @@ public class Command {
             ui.showDone(taskDone);
             storage.save(tasks);
             break;
+
         case "todo":
             if (txt.isEmpty()) {
                 throw new DukeException(" ☹ OOPS!!! The description of a todo cannot be empty.");
@@ -37,6 +41,7 @@ public class Command {
             ui.showAddTask(todoAdded, tasks.getSize());
             storage.save(tasks);
             break;
+
         case "deadline":
             if (txt.isEmpty()) {
                 throw new DukeException(" ☹ OOPS!!! The description of a deadline cannot be empty.");
@@ -47,6 +52,7 @@ public class Command {
             ui.showAddTask(deadlineAdded, tasks.getSize());
             storage.save(tasks);
             break;
+
         case "event":
             if (txt.isEmpty()) {
                 throw new DukeException(" ☹ OOPS!!! The description of an event cannot be empty.");
@@ -57,6 +63,7 @@ public class Command {
             ui.showAddTask(eventAdded, tasks.getSize());
             storage.save(tasks);
             break;
+
         case "delete":
             if (txt.isEmpty()) {
                 throw new DukeException(" ☹ OOPS!!! The description of an delete cannot be empty.");
@@ -65,6 +72,7 @@ public class Command {
             ui.showDeleted(deletedTask, tasks.getSize());
             storage.save(tasks);
             break;
+
         default:
             throw new DukeException(" ☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
         }

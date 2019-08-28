@@ -1,5 +1,12 @@
-import exceptions.DukeException;
-import execution.*;
+package duke;
+
+import duke.exceptions.DukeException;
+
+import duke.execution.Command;
+import duke.execution.Parser;
+import duke.execution.Storage;
+import duke.execution.TaskList;
+import duke.execution.Ui;
 
 public class Duke {
 
@@ -23,6 +30,7 @@ public class Duke {
 
     public void run() {
         ui.showWelcomeMessage();
+
         boolean shouldLoop = true;
         while (shouldLoop) {
             try {
