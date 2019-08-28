@@ -52,6 +52,9 @@ public class TaskList {
 
     public Task addDeadline(String title) throws DukeException {
         String[] split = title.split("/by ");
+        if (split.length == 1) {
+            throw new DukeException(" ☹ OOPS!!! Input should include 'by'!");
+        }
         if (!Parser.isDate(split[1])) {
             throw new DukeException(" ☹ OOPS!!! The date format inputted is in the wrong format!");
         }
@@ -62,6 +65,9 @@ public class TaskList {
 
     public Task addEvent(String title) throws DukeException{
         String[] split = title.split("/at ");
+        if (split.length == 1) {
+            throw new DukeException(" ☹ OOPS!!! Input should include 'at'!");
+        }
         if (!Parser.isDate(split[1])) {
             throw new DukeException(" ☹ OOPS!!! The date format inputted is in the wrong format!");
         }
