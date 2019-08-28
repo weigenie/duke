@@ -1,13 +1,21 @@
 import exceptions.DukeException;
 import execution.*;
 
+/**
+ * Main class to handle other classes.
+ */
 public class Duke {
 
+    /** Filepath to data document */
     static final String TEXT_DOCUMENT = "../../../data.txt";
 
+    /** Storage to read and write files */
     private Storage storage;
+    /** Collections of the tasks */
     private TaskList tasks;
+    /** Handles input and output */
     private Ui ui;
+    /** Action taken depending on input */
     private Command command;
 
     public Duke(String filePath) {
@@ -21,6 +29,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Initialise all the other working objects for the application.
+     */
     public void run() {
         ui.showWelcomeMessage();
         boolean shouldLoop = true;
@@ -35,6 +46,10 @@ public class Duke {
         }
     }
 
+    /**
+     * Main method
+     * @param args Arguments
+     */
     public static void main(String[] args) {
         new Duke(TEXT_DOCUMENT).run();
     }
