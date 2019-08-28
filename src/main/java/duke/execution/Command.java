@@ -1,7 +1,7 @@
-package execution;
+package duke.execution;
 
-import exceptions.DukeException;
-import models.Task;
+import duke.exceptions.DukeException;
+import duke.models.Task;
 
 public class Command {
 

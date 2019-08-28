@@ -1,4 +1,4 @@
-package models;
+package duke.models;
 
 public abstract class Task {
     protected String description;

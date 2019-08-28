@@ -1,5 +1,7 @@
-import exceptions.DukeException;
-import execution.*;
+package duke;
+
+import duke.exceptions.DukeException;
+import duke.execution.*;
 
 public class Duke {
 
