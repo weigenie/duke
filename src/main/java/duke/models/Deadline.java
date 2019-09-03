@@ -5,9 +5,14 @@ package duke.models;
  */
 public class Deadline extends Task {
 
-    /** Deadline of task */
+    /** Deadline of task. */
     private String date;
 
+    /**
+     * Deadline Task.
+     * @param description Description of task.
+     * @param date Date of task.
+     */
     public Deadline(String description, String date) {
         super(description);
         this.date = date;

@@ -4,11 +4,15 @@ package duke.models;
  * Task with a description and boolean of whether is has been done.
  */
 public abstract class Task {
-    /** Description of task */
+    /** Description of task. */
     protected String description;
-    /** Boolean of whether the task has been marked as done */
+    /** Boolean of whether the task has been marked as done. */
     protected boolean isDone;
 
+    /**
+     * Task.
+     * @param description Description of task.
+     */
     public Task(String description) {
         this.description = description;
         this.isDone = false;

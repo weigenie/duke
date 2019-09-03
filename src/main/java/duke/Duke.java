@@ -15,15 +15,19 @@ public class Duke {
 
     static final String TEXT_DOCUMENT = "./data/data.txt";
 
-    /** Storage to read and write files */
+    /** Storage to read and write files. */
     private Storage storage;
-    /** Collections of the tasks */
+    /** Collections of the tasks. */
     private TaskList tasks;
-    /** Handles input and output */
+    /** Handles input and output. */
     private Ui ui;
-    /** Action taken depending on input */
+    /** Action taken depending on input. */
     private Command command;
 
+    /**
+     * Initialising of programme.
+     * @param filePath Filepath of data stored.
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -54,7 +58,7 @@ public class Duke {
     }
 
     /**
-     * Main method
+     * Main method.
      * @param args Arguments
      */
     public static void main(String[] args) {

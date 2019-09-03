@@ -5,6 +5,10 @@ package duke.models;
  */
 public class Todo extends Task {
 
+    /**
+     * Todo Task.
+     * @param description Description of task.
+     */
     public Todo(String description) {
         super(description);
     }

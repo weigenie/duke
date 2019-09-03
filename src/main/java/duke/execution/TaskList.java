@@ -13,10 +13,17 @@ public class TaskList {
 
     private ArrayList<Task> tasks;
 
+    /**
+     * Initialises a new colelctions of tasks.
+     */
     public TaskList() {
         this.tasks = new ArrayList<>();
     }
 
+    /**
+     * Initialises a collections of tasks from an ArrayList.
+     * @param tasks Arraylist of tasks.
+     */
     public TaskList(ArrayList<Task> tasks) {
         this.tasks = tasks;
     }
@@ -107,7 +114,7 @@ public class TaskList {
      * @return Event that has been added.
      * @throws DukeException If met with error with the input.
      */
-    public Task addEvent(String title) throws DukeException{
+    public Task addEvent(String title) throws DukeException {
         String[] split = title.split("/at ");
         if (split.length == 1) {
             throw new DukeException(" ☹ OOPS!!! Input should include 'at'!");

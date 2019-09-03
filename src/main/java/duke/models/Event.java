@@ -5,9 +5,14 @@ package duke.models;
  */
 public class Event extends Task {
 
-    /** Specified date for the event */
+    /** Specified date for the event. */
     private String date;
 
+    /**
+     * Event Task.
+     * @param description Description of task.
+     * @param date Date of task.
+     */
     public Event(String description, String date) {
         super(description);
         this.date = date;

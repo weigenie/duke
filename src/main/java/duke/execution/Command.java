@@ -9,11 +9,24 @@ public class Command {
     private String action;
     private String txt;
 
+    /**
+     * Command to be executed by programme.
+     * @param action Type of command to be executed.
+     * @param txt Description of command.
+     */
     public Command(String action, String txt) {
         this.action = action;
         this.txt = txt;
     }
 
+    /**
+     * Executes the command.
+     * @param tasks Associated TaskList.
+     * @param ui Associated Ui.
+     * @param storage Associated Storage.
+     * @return Boolean whether the command has been ran.
+     * @throws DukeException If error was met.
+     */
     public boolean execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         switch (action) {
         case "bye":

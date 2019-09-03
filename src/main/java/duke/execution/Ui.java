@@ -9,10 +9,10 @@ import java.util.Scanner;
  */
 public class Ui {
 
-    /** Standard line for formatting */
+    /** Standard line for formatting. */
     private static String TAB = "\t____________________________________________________________";
 
-    /** Scans for input */
+    /** Scans for input. */
     private static final Scanner sc = new Scanner(System.in);
 
     /**
@@ -26,7 +26,7 @@ public class Ui {
      * Shows welcome message.
      */
     public void showWelcomeMessage() {
-        print("Hello! I'm duke.Duke\n\tWhat can I do for you?");
+        print("Hello! I'm Duke\n\tWhat can I do for you?");
     }
 
     /**
@@ -51,8 +51,8 @@ public class Ui {
      * @param size Number of tasks in the collections.
      */
     public void showAddTask(Task task, int size) {
-        print(" Got it. I've added this task:\n\t   " + task + "\n\tNow you have " +
-                size + " tasks in the list.");
+        print(" Got it. I've added this task:\n\t   " + task + "\n\tNow you have "
+                + size + " tasks in the list.");
     }
 
     /**
@@ -61,8 +61,8 @@ public class Ui {
      * @param size Number of tasks left in the collections.
      */
     public void showDeleted(Task task, int size) {
-        print(" Noted. I've removed this task: \n\t   " + task + "\n\t Now you have " +
-                size + " tasks in the list.");
+        print(" Noted. I've removed this task: \n\t   " + task + "\n\t Now you have "
+                + size + " tasks in the list.");
     }
 
     /**
