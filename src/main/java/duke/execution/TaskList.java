@@ -17,6 +17,7 @@ public class TaskList {
      * Initialises a new colelctions of tasks.
      */
     public TaskList() {
+        System.out.println("initiating new tasklist");
         this.tasks = new ArrayList<>();
     }
 

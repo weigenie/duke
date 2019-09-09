@@ -15,6 +15,8 @@ public class Ui {
     /** Scans for input. */
     private static final Scanner sc = new Scanner(System.in);
 
+    private String response = "";
+
     /**
      * Shows loading error.
      */
@@ -81,9 +83,11 @@ public class Ui {
             print(" No tasks to be found.");
         } else {
             System.out.println(TAB);
+            response = "Here are the tasks in your list\n";
             System.out.println("\t Here are the tasks in your list");
             for (int i = 0; i < taskList.getSize(); i++) {
                 System.out.println("\t " + (i + 1) + ". " + taskList.get(i));
+                response += (i + 1) + ". " + taskList.get(i) + "\n";
             }
             System.out.println(TAB + "\n");
         }
@@ -102,8 +106,13 @@ public class Ui {
      * @param txt Text to be printed within the formatted borders.
      */
     private void print(String txt) {
+        this.response = txt;
         System.out.println(TAB);
         System.out.println("\t" + txt);
         System.out.println(TAB + "\n");
+    }
+
+    public String getResponse() {
+        return this.response;
     }
 }

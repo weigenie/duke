@@ -21,12 +21,14 @@ import duke.execution.Storage;
 import duke.execution.TaskList;
 import duke.execution.Ui;
 
+import java.io.IOException;
+
 /**
  * Main class to handle other classes.
  */
 public class Duke extends Application {
 
-    static final String TEXT_DOCUMENT = "./data/data.txt";
+    static final String TEXT_DOCUMENT = "./src/main/java/data/data.txt";
 
     /** Storage to read and write files. */
     private Storage storage;
@@ -50,7 +52,14 @@ public class Duke extends Application {
      * Dummy constructor.
      */
     public Duke() {
-
+        ui = new Ui();
+        storage = new Storage(TEXT_DOCUMENT);
+        try {
+            tasks = new TaskList(storage.load());
+        } catch (DukeException | IOException e) {
+            ui.showLoadingError();
+            tasks = new TaskList();
+        }
     }
 
     /**
@@ -62,7 +71,7 @@ public class Duke extends Application {
         storage = new Storage(filePath);
         try {
             tasks = new TaskList(storage.load());
-        } catch (DukeException e) {
+        } catch (DukeException | IOException e) {
             ui.showLoadingError();
             tasks = new TaskList();
         }
@@ -181,7 +190,13 @@ public class Duke extends Application {
      * Replace this stub with your completed method.
      */
     protected String getResponse(String input) {
-        return "Duke heard: " + input;
+        try {
+            Command c = Parser.parse(input);
+            c.execute(tasks, ui, storage);
+            return ui.getResponse();
+        } catch (DukeException e) {
+            return e.getMessage();
+        }
     }
 
     /**
