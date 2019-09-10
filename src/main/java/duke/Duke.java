@@ -176,7 +176,8 @@ public class Duke extends Application {
             c.execute(tasks, ui, storage);
             return ui.getResponse();
         } catch (DukeException e) {
-            return e.getMessage();
+            ui.showError(e.getMessage());
+            return ui.getResponse();
         }
     }
 }

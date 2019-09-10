@@ -1,6 +1,8 @@
 package duke.execution;
 
-import duke.execution.commands.Command;
+import duke.exceptions.DukeException;
+import duke.execution.commands.*;
+import duke.models.Task;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -16,16 +18,11 @@ public class Parser {
      * @param line Line to be parsed.
      * @return Command after parsing.
      */
-    public static Command parse(String line) {
+    public static Command parse(String line) throws DukeException {
         assert line != null;
         String[] split = line.split(" ");
-        String rest = "";
-        for (int i = 1; i < split.length; i++) {
-            rest += split[i];
-            rest += " ";
-        }
-        String actionWord = split[0];
-        return new Command(actionWord, rest);
+        String rest = getRestOfInput(split);
+        return parseForCommand(split[0], rest);
     }
 
     /**
@@ -78,5 +75,76 @@ public class Parser {
             System.out.println(e.getMessage());
             return "";
         }
+    }
+
+    private static Command parseForCommand(String action, String txt) throws DukeException {
+        switch (action) {
+        case "bye":
+            return new ByeCommand(txt);
+
+        case "list":
+            return new ListCommand(txt);
+
+        case "done":
+            if (txt.isEmpty()) {
+                System.out.println("ERROR_LOG: txt: " + txt);
+                throw new DukeException(" ☹ OOPS!!! The description of a done cannot be empty.");
+            }
+            return new DoneCommand(txt);
+
+        case "todo":
+            if (txt.isEmpty()) {
+                System.out.println("ERROR_LOG: txt: " + txt);
+                throw new DukeException(" ☹ OOPS!!! The description of a todo cannot be empty.");
+            }
+            return new TodoCommand(txt);
+
+        case "deadline":
+            if (txt.isEmpty()) {
+                System.out.println("ERROR_LOG: txt: " + txt);
+                throw new DukeException(" ☹ OOPS!!! The description of a deadline cannot be empty.");
+            } else if (!txt.contains("/by")) {
+                System.out.println("ERROR_LOG: txt: " + txt);
+                throw new DukeException(" ☹ OOPS!!! Deadline input should include '/by'.");
+            }
+            return new DeadlineCommand(txt);
+
+        case "event":
+            if (txt.isEmpty()) {
+                System.out.println("ERROR_LOG: txt: " + txt);
+                throw new DukeException(" ☹ OOPS!!! The description of an event cannot be empty.");
+            } else if (!txt.contains("/at")) {
+                System.out.println("ERROR_LOG: txt: " + txt);
+                throw new DukeException(" ☹ OOPS!!! Event input should include '/at'.");
+            }
+            return new EventCommand(txt);
+
+        case "delete":
+            if (txt.isEmpty()) {
+                System.out.println("ERROR_LOG: txt: " + txt);
+                throw new DukeException(" ☹ OOPS!!! The description of an delete cannot be empty.");
+            }
+            return new DeleteCommand(txt);
+
+        case "find":
+            if (txt.isEmpty()) {
+                System.out.println("ERROR_LOG: txt: " + txt);
+                throw new DukeException(" ☹ OOPS!!! There is no input for the search!");
+            }
+            return new FindCommand(txt);
+
+        default:
+            System.out.println("ERROR_LOG: txt: " + txt);
+            throw new DukeException(" ☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+        }
+    }
+
+    private static String getRestOfInput(String[] split) {
+        String rest = "";
+        for (int i = 1; i < split.length; i++) {
+            rest += split[i];
+            rest += " ";
+        }
+        return rest;
     }
 }

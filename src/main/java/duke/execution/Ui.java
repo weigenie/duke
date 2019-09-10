@@ -13,7 +13,7 @@ public class Ui {
      * Shows loading error.
      */
     public void showLoadingError() {
-        setResponse("Data file cannot be loaded");
+        System.out.println("Data file cannot be loaded");
     }
 
     /**

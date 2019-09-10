@@ -32,15 +32,15 @@ public class Storage {
         ArrayList<Task> tasks = new ArrayList<>();
         File file = new File(filepath);
         assert file != null;
+
         FileReader fileReader;
         try {
             fileReader = new FileReader(file);
         } catch (IOException e) {
             return createNewFile(file);
         }
-        BufferedReader bufferedReader = new BufferedReader(fileReader);
 
-        readFromData(bufferedReader, tasks);
+        readFromData(new BufferedReader(fileReader), tasks);
         return tasks;
     }
 
@@ -48,7 +48,7 @@ public class Storage {
      * Saves tasks into specified file.
      * @param taskList Tasks to be saved.
      */
-    public void save(TaskList taskList) {
+    public void saveToDataFile(TaskList taskList) {
         try {
             ArrayList<Task> tasks = taskList.getTasks();
             FileWriter fileWriter = new FileWriter(filepath);
@@ -77,33 +77,37 @@ public class Storage {
     private void readFromData(BufferedReader bufferedReader, ArrayList<Task> tasks) throws IOException, DukeException {
         String line = null;
         while ((line = bufferedReader.readLine()) != null) {
-            String[] splited = line.split("\\|");
-            switch (splited[0]) {
-                case "T":
-                    Todo newTodo = new Todo(splited[2]);
-                    if (Boolean.parseBoolean(splited[1])) {
-                        newTodo.markAsDone();
-                    }
-                    tasks.add(newTodo);
-                    break;
-                case "D":
-                    Deadline newDeadline = new Deadline(splited[2], splited[3]);
-                    if (Boolean.parseBoolean(splited[1])) {
-                        newDeadline.markAsDone();
-                    }
-                    tasks.add(newDeadline);
-                    break;
-                case "E":
-                    Event newEvent = new Event(splited[2], splited[3]);
-                    if (Boolean.parseBoolean(splited[1])) {
-                        newEvent.markAsDone();
-                    }
-                    tasks.add(newEvent);
-                    break;
-                default:
-                    throw new DukeException("error data formatting in data.txt");
-            }
+            String[] split = line.split("\\|");
+            addToTaskList(tasks, split);
+            bufferedReader.close();
         }
-        bufferedReader.close();
+    }
+
+    private void addToTaskList(ArrayList<Task> tasks, String[] split) throws DukeException {
+        switch (split[0]) {
+        case "T":
+            Todo newTodo = new Todo(split[2]);
+            if (Boolean.parseBoolean(split[1])) {
+                newTodo.markAsDone();
+            }
+            tasks.add(newTodo);
+            break;
+        case "D":
+            Deadline newDeadline = new Deadline(split[2], split[3]);
+            if (Boolean.parseBoolean(split[1])) {
+                newDeadline.markAsDone();
+            }
+            tasks.add(newDeadline);
+            break;
+        case "E":
+            Event newEvent = new Event(split[2], split[3]);
+            if (Boolean.parseBoolean(split[1])) {
+                newEvent.markAsDone();
+            }
+            tasks.add(newEvent);
+            break;
+        default:
+            throw new DukeException("error data formatting in data.txt");
+        }
     }
 }

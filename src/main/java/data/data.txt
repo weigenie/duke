@@ -1,5 +1,1 @@
-T|0|Exercise
-T|0|Buy groceries 
-D|0|Submission |1st of January 19, 6:00 pm
-E|0|Hackathon |12th of December 19, 6:00 pm
-D|0|Eat groceries |17th of June 19, 6:00 pm
+T|0|eat lunch 
