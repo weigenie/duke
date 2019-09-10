@@ -13,6 +13,7 @@ import java.io.IOException;
  */
 public class Main extends Application {
 
+    /** Controller for FXMLLoader */
     private Duke duke = new Duke();
 
     @Override

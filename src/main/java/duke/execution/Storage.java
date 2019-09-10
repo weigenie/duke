@@ -36,45 +36,11 @@ public class Storage {
         try {
             fileReader = new FileReader(file);
         } catch (IOException e) {
-            System.out.println(file);
-            if (file.createNewFile()) {
-                System.out.println("data file is created");
-            } else {
-                System.out.println("data file is not created");
-            }
-            return null;
+            return createNewFile(file);
         }
         BufferedReader bufferedReader = new BufferedReader(fileReader);
-        String line = null;
-        while ((line = bufferedReader.readLine()) != null) {
-            String[] splited = line.split("\\|");
-            switch (splited[0]) {
-            case "T":
-                Todo newTodo = new Todo(splited[2]);
-                if (Boolean.parseBoolean(splited[1])) {
-                    newTodo.markAsDone();
-                }
-                tasks.add(newTodo);
-                break;
-            case "D":
-                Deadline newDeadline = new Deadline(splited[2], splited[3]);
-                if (Boolean.parseBoolean(splited[1])) {
-                    newDeadline.markAsDone();
-                }
-                tasks.add(newDeadline);
-                break;
-            case "E":
-                Event newEvent = new Event(splited[2], splited[3]);
-                if (Boolean.parseBoolean(splited[1])) {
-                    newEvent.markAsDone();
-                }
-                tasks.add(newEvent);
-                break;
-            default:
-                throw new DukeException("error data formatting in data.txt");
-            }
-        }
-        bufferedReader.close();
+
+        readFromData(bufferedReader, tasks);
         return tasks;
     }
 
@@ -97,5 +63,47 @@ public class Storage {
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
+    }
+
+    private ArrayList<Task> createNewFile(File file) throws IOException {
+        if (file.createNewFile()) {
+            System.out.println("data file is created");
+        } else {
+            System.out.println("data file is not created");
+        }
+        return null;
+    }
+
+    private void readFromData(BufferedReader bufferedReader, ArrayList<Task> tasks) throws IOException, DukeException {
+        String line = null;
+        while ((line = bufferedReader.readLine()) != null) {
+            String[] splited = line.split("\\|");
+            switch (splited[0]) {
+                case "T":
+                    Todo newTodo = new Todo(splited[2]);
+                    if (Boolean.parseBoolean(splited[1])) {
+                        newTodo.markAsDone();
+                    }
+                    tasks.add(newTodo);
+                    break;
+                case "D":
+                    Deadline newDeadline = new Deadline(splited[2], splited[3]);
+                    if (Boolean.parseBoolean(splited[1])) {
+                        newDeadline.markAsDone();
+                    }
+                    tasks.add(newDeadline);
+                    break;
+                case "E":
+                    Event newEvent = new Event(splited[2], splited[3]);
+                    if (Boolean.parseBoolean(splited[1])) {
+                        newEvent.markAsDone();
+                    }
+                    tasks.add(newEvent);
+                    break;
+                default:
+                    throw new DukeException("error data formatting in data.txt");
+            }
+        }
+        bufferedReader.close();
     }
 }

@@ -76,24 +76,6 @@ public class Duke extends Application {
         }
     }
 
-    /**
-     * Initialise all the other working objects for the application.
-     */
-    public void run() {
-        ui.showWelcomeMessage();
-
-        boolean shouldLoop = true;
-        while (shouldLoop) {
-            try {
-                String fullCommand = ui.readCommand();
-                Command c = Parser.parse(fullCommand);
-                shouldLoop = c.execute(tasks, ui, storage);
-            } catch (DukeException e) {
-                ui.showError(e.getMessage());
-            }
-        }
-    }
-
     @Override
     public void start(Stage primaryStage) throws Exception {
         scrollPane = new ScrollPane();
@@ -196,13 +178,5 @@ public class Duke extends Application {
         } catch (DukeException e) {
             return e.getMessage();
         }
-    }
-
-    /**
-     * Main method.
-     * @param args Arguments
-     */
-    public static void main(String[] args) {
-        new Duke(TEXT_DOCUMENT).run();
     }
 }
