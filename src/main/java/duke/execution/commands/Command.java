@@ -1,7 +1,10 @@
-package duke.execution;
+package duke.execution.commands;
 
 import duke.exceptions.DukeException;
 
+import duke.execution.Storage;
+import duke.execution.TaskList;
+import duke.execution.Ui;
 import duke.models.Task;
 
 public class Command {
@@ -28,6 +31,9 @@ public class Command {
      * @throws DukeException If error was met.
      */
     public boolean execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+        assert tasks != null;
+        assert ui != null;
+        assert storage != null;
         switch (action) {
         case "bye":
             ui.exit();

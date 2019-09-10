@@ -1,5 +1,7 @@
 package duke.execution;
 
+import duke.execution.commands.Command;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
@@ -15,6 +17,7 @@ public class Parser {
      * @return Command after parsing.
      */
     public static Command parse(String line) {
+        assert line != null;
         String[] split = line.split(" ");
         String rest = "";
         for (int i = 1; i < split.length; i++) {
@@ -31,6 +34,7 @@ public class Parser {
      * @return Boolean whether the string can be formatted to be a Date.
      */
     public static boolean isDate(String txt) {
+        assert txt != null;
         try {
             DATE_FORMAT.parse(txt);
             return true;
@@ -47,6 +51,7 @@ public class Parser {
     public static String getFormattedDate(String txt) {
         try {
             Date date = DATE_FORMAT.parse(txt);
+            assert date != null;
             String day = new SimpleDateFormat("dd").format(date);
             String month = new SimpleDateFormat("MMMMMMMMMMMMMMM").format(date);
             String year = new SimpleDateFormat("yy").format(date);

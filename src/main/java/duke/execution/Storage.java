@@ -31,15 +31,16 @@ public class Storage {
     public ArrayList<Task> load() throws DukeException, IOException {
         ArrayList<Task> tasks = new ArrayList<>();
         File file = new File(filepath);
+        assert file != null;
         FileReader fileReader;
         try {
             fileReader = new FileReader(file);
         } catch (IOException e) {
             System.out.println(file);
             if (file.createNewFile()) {
-                System.out.println("file is created");
+                System.out.println("data file is created");
             } else {
-                System.out.println("file is not created");
+                System.out.println("data file is not created");
             }
             return null;
         }
@@ -85,6 +86,7 @@ public class Storage {
         try {
             ArrayList<Task> tasks = taskList.getTasks();
             FileWriter fileWriter = new FileWriter(filepath);
+            assert fileWriter != null;
             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
             for (Task task: tasks) {
                 String taskData = task.getData();

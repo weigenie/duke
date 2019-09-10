@@ -9,13 +9,12 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-import duke.execution.Command;
+import duke.execution.commands.Command;
 import duke.execution.Parser;
 import duke.execution.Storage;
 import duke.execution.TaskList;
@@ -49,7 +48,7 @@ public class Duke extends Application {
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
     /**
-     * Dummy constructor.
+     * Constructor for JavaFX implementation
      */
     public Duke() {
         ui = new Ui();

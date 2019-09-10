@@ -34,6 +34,7 @@ public class TaskList {
      * @param task Task to be added.
      */
     public void add(Task task) {
+        assert tasks != null;
         tasks.add(task);
     }
 
@@ -42,6 +43,7 @@ public class TaskList {
      * @param no Position of task to be deleted.
      */
     public void delete(int no) {
+        assert tasks != null;
         tasks.remove(no - 1);
     }
 
@@ -50,6 +52,7 @@ public class TaskList {
      * @return Collections of tasks.
      */
     public ArrayList<Task> getTasks() {
+        assert tasks != null;
         return this.tasks;
     }
 
@@ -58,6 +61,7 @@ public class TaskList {
      * @return Number of tasks in collections.
      */
     public int getSize() {
+        assert tasks != null;
         return this.tasks.size();
     }
 
@@ -67,6 +71,7 @@ public class TaskList {
      * @return Task associated with num.
      */
     public Task get(int num) {
+        assert tasks != null;
         return this.tasks.get(num);
     }
 
@@ -76,6 +81,7 @@ public class TaskList {
      * @return Task that has been marked as done.
      */
     public Task markDone(int n) {
+        assert tasks != null;
         tasks.get(n - 1).markAsDone();
         return tasks.get(n - 1);
     }
@@ -86,6 +92,7 @@ public class TaskList {
      * @return Todo that has been added.
      */
     public Task addTodo(String title) {
+        assert tasks != null;
         this.tasks.add(new Todo(title));
         return tasks.get(tasks.size() - 1);
     }
@@ -105,6 +112,7 @@ public class TaskList {
             throw new DukeException(" ☹ OOPS!!! The date format inputted is in the wrong format!");
         }
         Deadline deadlineAdded = new Deadline(split[0], Parser.getFormattedDate(split[1]));
+        assert tasks != null;
         tasks.add(deadlineAdded);
         return deadlineAdded;
     }
@@ -124,6 +132,7 @@ public class TaskList {
             throw new DukeException(" ☹ OOPS!!! The date format inputted is in the wrong format!");
         }
         Event eventAdded = new Event(split[0], Parser.getFormattedDate(split[1]));
+        assert tasks != null;
         tasks.add(eventAdded);
         return eventAdded;
     }
@@ -135,6 +144,7 @@ public class TaskList {
      */
     public Task deleteTask(String txt) {
         int deleteNum = Integer.parseInt(txt.trim()) - 1;
+        assert tasks != null;
         return tasks.remove(deleteNum);
     }
 
@@ -145,6 +155,7 @@ public class TaskList {
      */
     public TaskList find(String txt) {
         ArrayList<Task> list = new ArrayList<>();
+        assert tasks != null;
         for (int i = 0; i < tasks.size(); i++) {
             if (tasks.get(i).contains(txt)) {
                 list.add(tasks.get(i));
@@ -158,6 +169,7 @@ public class TaskList {
      * @return Boolean value whether the collections is empty.
      */
     public boolean isEmpty() {
+        assert tasks != null;
         return tasks.isEmpty();
     }
 }
