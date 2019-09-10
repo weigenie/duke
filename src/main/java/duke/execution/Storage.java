@@ -30,14 +30,14 @@ public class Storage {
      */
     public ArrayList<Task> load() throws DukeException, IOException {
         ArrayList<Task> tasks = new ArrayList<>();
-        File file = new File(filepath);
-        assert file != null;
-
         FileReader fileReader;
         try {
+            fileReader = new FileReader(filepath);
+        } catch (FileNotFoundException e) {
+            System.out.println("ERROR_LOG: file not found: " + filepath);
+            File file = new File(filepath);
+            createNewFile(file);
             fileReader = new FileReader(file);
-        } catch (IOException e) {
-            return createNewFile(file);
         }
 
         readFromData(new BufferedReader(fileReader), tasks);
@@ -75,12 +75,14 @@ public class Storage {
     }
 
     private void readFromData(BufferedReader bufferedReader, ArrayList<Task> tasks) throws IOException, DukeException {
-        String line = null;
-        while ((line = bufferedReader.readLine()) != null) {
+        assert  bufferedReader != null;
+        String line = bufferedReader.readLine();
+        while (line != null) {
             String[] split = line.split("\\|");
             addToTaskList(tasks, split);
-            bufferedReader.close();
+            line = bufferedReader.readLine();
         }
+        bufferedReader.close();
     }
 
     private void addToTaskList(ArrayList<Task> tasks, String[] split) throws DukeException {

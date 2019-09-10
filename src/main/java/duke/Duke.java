@@ -56,7 +56,7 @@ public class Duke extends Application {
         try {
             tasks = new TaskList(storage.load());
         } catch (DukeException | IOException e) {
-            ui.showLoadingError();
+            ui.showLoadingError(e);
             tasks = new TaskList();
         }
     }
@@ -71,7 +71,7 @@ public class Duke extends Application {
         try {
             tasks = new TaskList(storage.load());
         } catch (DukeException | IOException e) {
-            ui.showLoadingError();
+            ui.showLoadingError(e);
             tasks = new TaskList();
         }
     }
@@ -176,7 +176,7 @@ public class Duke extends Application {
             c.execute(tasks, ui, storage);
             return ui.getResponse();
         } catch (DukeException e) {
-            ui.showError(e.getMessage());
+            ui.showError(e);
             return ui.getResponse();
         }
     }

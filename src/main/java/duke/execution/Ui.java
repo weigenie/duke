@@ -11,8 +11,10 @@ public class Ui {
 
     /**
      * Shows loading error.
+     * @param e Exception.
      */
-    public void showLoadingError() {
+    public void showLoadingError(Exception e) {
+        e.printStackTrace();
         System.out.println("Data file cannot be loaded");
     }
 
@@ -25,11 +27,11 @@ public class Ui {
 
     /**
      * Shows error.
-     * @param msg Error message.
+     * @param e Exception.
      */
-    public void showError(String msg) {
-        System.out.println("ERROR: " + msg);
-        setResponse(msg);
+    public void showError(Exception e) {
+        e.printStackTrace();
+        setResponse(e.getMessage());
     }
 
     /**
