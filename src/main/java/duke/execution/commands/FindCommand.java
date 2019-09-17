@@ -16,7 +16,8 @@ public class FindCommand extends Command  {
         super.execute(tasks, ui, storage);
         checkValidity();
 
-        ui.listTasks(tasks.find(txt));
+        TaskList foundTasks = tasks.find(txt);
+        ui.listTasks(foundTasks);
         return true;
     }
 

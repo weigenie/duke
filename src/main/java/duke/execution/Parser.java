@@ -86,51 +86,21 @@ public class Parser {
             return new ListCommand(txt);
 
         case "done":
-            if (txt.isEmpty()) {
-                System.out.println("ERROR_LOG: txt: " + txt);
-                throw new DukeException(" ☹ OOPS!!! The description of a done cannot be empty.");
-            }
             return new DoneCommand(txt);
 
         case "todo":
-            if (txt.isEmpty()) {
-                System.out.println("ERROR_LOG: txt: " + txt);
-                throw new DukeException(" ☹ OOPS!!! The description of a todo cannot be empty.");
-            }
             return new TodoCommand(txt);
 
         case "deadline":
-            if (txt.isEmpty()) {
-                System.out.println("ERROR_LOG: txt: " + txt);
-                throw new DukeException(" ☹ OOPS!!! The description of a deadline cannot be empty.");
-            } else if (!txt.contains("/by")) {
-                System.out.println("ERROR_LOG: txt: " + txt);
-                throw new DukeException(" ☹ OOPS!!! Deadline input should include '/by'.");
-            }
             return new DeadlineCommand(txt);
 
         case "event":
-            if (txt.isEmpty()) {
-                System.out.println("ERROR_LOG: txt: " + txt);
-                throw new DukeException(" ☹ OOPS!!! The description of an event cannot be empty.");
-            } else if (!txt.contains("/at")) {
-                System.out.println("ERROR_LOG: txt: " + txt);
-                throw new DukeException(" ☹ OOPS!!! Event input should include '/at'.");
-            }
             return new EventCommand(txt);
 
         case "delete":
-            if (txt.isEmpty()) {
-                System.out.println("ERROR_LOG: txt: " + txt);
-                throw new DukeException(" ☹ OOPS!!! The description of an delete cannot be empty.");
-            }
             return new DeleteCommand(txt);
 
         case "find":
-            if (txt.isEmpty()) {
-                System.out.println("ERROR_LOG: txt: " + txt);
-                throw new DukeException(" ☹ OOPS!!! There is no input for the search!");
-            }
             return new FindCommand(txt);
 
         default:
