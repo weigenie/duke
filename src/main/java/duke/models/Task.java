@@ -45,7 +45,7 @@ public abstract class Task {
      * @return Boolean of whether task title contains text.
      */
     public boolean contains(String txt) {
-        return description.contains(txt);
+        return description.toLowerCase().contains(txt.toLowerCase());
     }
 
     @Override

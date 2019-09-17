@@ -103,6 +103,9 @@ public class Parser {
         case "find":
             return new FindCommand(txt);
 
+        case "help":
+            return new HelpCommand(txt);
+
         default:
             System.out.println("ERROR_LOG: txt: " + txt);
             throw new DukeException(" ☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
