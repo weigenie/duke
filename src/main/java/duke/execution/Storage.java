@@ -64,7 +64,7 @@ public class Storage {
             System.out.println(e.getMessage());
         }
     }
-
+    
     private ArrayList<Task> createNewFile(File file) throws IOException {
         if (file.createNewFile()) {
             System.out.println("data file is created");
