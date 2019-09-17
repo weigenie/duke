@@ -77,6 +77,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Parse String for a Command to be returned.
+     * @param action String specifying the Command type.
+     * @param txt String containing the description for the Command to be executed.
+     * @return Command after parsing.
+     * @throws DukeException If action String not identifiable.
+     */
     private static Command parseForCommand(String action, String txt) throws DukeException {
         switch (action) {
         case "bye":
@@ -112,6 +119,11 @@ public class Parser {
         }
     }
 
+    /**
+     * Seperates the rest of the line from the first word in a splited input string.
+     * @param split Splited input string.
+     * @return Concatenated String without the first word.
+     */
     private static String getRestOfInput(String[] split) {
         String rest = "";
         for (int i = 1; i < split.length; i++) {
