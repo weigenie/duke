@@ -1,4 +1,4 @@
-#weiGENIE
+# weiGENIE
 
 This genie will help you manage all your tasks!
 
