@@ -1,9 +1,5 @@
-T|0|test 
-T|0|test 
-T|0|test 
-T|0|test 
-T|0|test 
-T|0|test 
-T|0|test 
-T|0|test 
-T|0|test 
+T|0|Buy Groceries 
+D|0|CS2103T Submission |1st of October 19, 11:59 pm
+E|0|Hackathon |10th of October 19, 9:00 am
+T|0|Visit Grandmother 
+T|0|Revise for CS2100 

@@ -6,17 +6,18 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
-import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextAlignment;
 
 import java.io.IOException;
 import java.util.Collections;
 
 public class DialogBox extends HBox {
     @FXML
-    private Label dialog;
+    private Text dialogText;
     @FXML
     private ImageView displayPicture;
 
@@ -30,7 +31,7 @@ public class DialogBox extends HBox {
             e.printStackTrace();
         }
 
-        dialog.setText(text);
+        dialogText.setText(text);
         displayPicture.setImage(img);
     }
 
@@ -41,6 +42,8 @@ public class DialogBox extends HBox {
         ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());
         Collections.reverse(tmp);
         getChildren().setAll(tmp);
+        Text t = (Text) getChildren().get(1);
+        t.setTextAlignment(TextAlignment.LEFT);
         setAlignment(Pos.TOP_LEFT);
     }
 
